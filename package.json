@@ -1,14 +1,16 @@
 {
 	"name": "@techgreens/eslint-config",
-	"version": "1.0.0-alpha.0",
+	"version": "1.0.0-alpha.1",
 	"description": "An ESLint and Prettier config ready to go for techgreens projects",
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"prettier.config.js"
+		"prettier.config.js",
+		"prettier.js"
 	],
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"publish": "npm publish --registry https://npm.techgreens.com"
 	},
 	"keywords": [
 		"eslint",
