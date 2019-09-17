@@ -1,0 +1,3 @@
+# Techgreens eslint config
+
+More to come...
