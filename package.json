@@ -1,6 +1,6 @@
 {
 	"name": "@techgreens/eslint-config",
-	"version": "1.0.0-alpha.2",
+	"version": "1.0.0-alpha.3",
 	"description": "An ESLint and Prettier config ready to go for techgreens projects",
 	"main": "index.js",
 	"files": [
