@@ -20,12 +20,12 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/twally3/-techgreens-eslint-config"
+		"url": "https://github.com/techgreens-hub/eslint-config-techgreens"
 	},
 	"bugs": {
-		"url": "https://github.com/twally3/-techgreens-eslint-config/issues"
+		"url": "https://github.com/techgreens-hub/eslint-config-techgreens/issues"
 	},
-	"homepage": "https://github.com/twally3/-techgreens-eslint-config#readme",
+	"homepage": "https://github.com/techgreens-hub/eslint-config-techgreens#readme",
 	"peerDependencies": {
 		"eslint": "^6.4.0",
 		"prettier": "^1.18.2"
