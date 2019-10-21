@@ -14,6 +14,7 @@ module.exports = {
       }
     ],
     "no-console": "warn",
+    "no-inline-comments": "error",
     "no-var": "error",
     "arrow-body-style": ["error", "as-needed"],
     "prefer-const": "error",
