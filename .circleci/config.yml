@@ -19,13 +19,27 @@ jobs:
       - run:
           name: Login to project
           command: |
-            cat < .npmrc
+            cat >> .npmrc << EOL
             //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-            EOF
+            EOL
 
       - run:
           name: Publish to NPM
-          command: npm publish 
+          command: |
+            PACKAGE_VERSION=$(cat package.json \
+              | grep version \
+              | head -1 \
+              | awk -F: '{ print $2 }' \
+              | sed 's/[",]//g' \
+              | tr -d '[[:space:]]')
+
+            TAG=$(echo $PACKAGE_VERSION | sed -n 's/^[0-9]*\.[0-9]*\.[0-9]*\(\-\([a-z]*\)\.*[0-9]*\)$/\2/p')
+
+            if [[ -n "$TAG" ]]; then
+              npm publish --tag $TAG
+            elif [[ -z "$TAG" ]]; then
+              npm publish
+            fi
 
       - save_cache:
           paths:
