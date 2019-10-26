@@ -19,9 +19,9 @@ jobs:
       - run:
           name: Login to project
           command: |
-            cat < .npmrc
+            cat >> .npmrc << EOL
             //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-            EOF
+            EOL
 
       - run:
           name: Publish to NPM
@@ -39,7 +39,5 @@ workflows:
       - deploy-not-release:
           context: techgreens-context
           filters:
-            branches:
-              only: master
             tags:
               ignore: /^v.*/
