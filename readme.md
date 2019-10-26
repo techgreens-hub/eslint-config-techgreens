@@ -10,4 +10,4 @@ Our default export contains all of our ESLint rules. It requires `eslint`, `pret
 
 1. Install the correct versions of each package, which are listed by the command:
 
-2. Add `"extends": "airbnb"` to your `.eslintrc`
+2. Add `"extends": "@techgreens/eslint-config-techgreens"` to your `.eslintrc`
