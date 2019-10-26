@@ -1,5 +1,7 @@
 # eslint-config-techgreens
 
+[![npm version](https://badge.fury.io/js/%40techgreens%2Feslint-config-techgreens.svg)](https://badge.fury.io/js/%40techgreens%2Feslint-config-techgreens)
+
 This package provides TechGreens' .eslintrc as an extensible shared config.
 
 ## Usage
