@@ -32,9 +32,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
-
 workflows:
   version: 2
   deploy_staging:
