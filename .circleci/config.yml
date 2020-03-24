@@ -22,7 +22,7 @@ jobs:
 
             echo "TESTX"
 
-            git diff --name-only origin/master HEAD | grep -c Hello
+            git diff --name-only origin/master HEAD | grep -c "index.js\|package-lock.json\|package.json"
 
             echo "TESTX"
 
