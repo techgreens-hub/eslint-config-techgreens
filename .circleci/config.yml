@@ -22,9 +22,7 @@ jobs:
 
             echo "TESTX"
 
-            git diff --name-only origin/master HEAD
-
-            echo Hello | grep -c Hello
+            git diff --name-only origin/master HEAD | grep -c Hello
 
             echo "TESTX"
 
