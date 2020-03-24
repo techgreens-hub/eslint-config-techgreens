@@ -1,6 +1,59 @@
 version: 2
 jobs:
-  deploy-not-release:
+	test:
+		docker:
+			- image: circleci/node:12
+		
+		working_directory: ~/repo
+
+		steps:
+			- checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+						- v1-dependencies-
+			- run: 
+					name: Check version was updated
+					command: |
+						echo "Checking files relating to package have changed"
+
+						DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
+						
+						if [[ $DIFF -eq 0 ]]; then
+							echo "No changes to application, skipping deployment"
+							exit 0
+						fi
+						
+						echo "Checking version number has been updated"
+						
+						PACKAGE_NAME=$(cat package.json \
+													| grep name \
+													| head -1 \
+													| awk -F: '{ print $2 }' \
+													| sed 's/[",]//g' \
+													| tr -d '[[:space:]]')
+						
+						PACKAGE_VERSION=$(cat package.json \
+													| grep version \
+													| head -1 \
+													| awk -F: '{ print $2 }' \
+													| sed 's/[",]//g' \
+													| tr -d '[[:space:]]')
+						
+						LAST_VERSION=$(npm view $PACKAGE_NAME version)
+						
+						if [[ "$PACKAGE_VERSION" == "$LAST_VERSION" ]]; then
+							echo "Package version should be updated"
+							exit 1
+						fi
+			- save_cache:
+					paths:
+						- node_modules
+					key: v1-dependencies-{{ checksum "package.json" }}
+  release:
     docker:
       - image: circleci/node:12
 
@@ -25,7 +78,14 @@ jobs:
 
       - run:
           name: Publish to NPM
-          command: |
+					command: |
+						DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
+						
+						if [[ $DIFF -eq 0 ]]; then
+							echo "No changes to application, skipping deployment"
+							exit 0
+						fi
+
             PACKAGE_VERSION=$(cat package.json \
               | grep version \
               | head -1 \
@@ -37,7 +97,8 @@ jobs:
 
             if [[ -n "$TAG" ]]; then
               npm publish --tag $TAG
-            elif [[ -z "$TAG" ]]; then
+						elif [[ -z "$TAG" ]]; then
+							# TODO: This should probably default to @next
               npm publish
             fi
 
@@ -49,9 +110,13 @@ jobs:
 workflows:
   version: 2
   deploy_staging:
-    jobs:
-      - deploy-not-release:
-          context: techgreens-context
+		jobs:
+			- test:
+					context: techgreens-context
+      - release:
+					context: techgreens-context
+					requires:
+            - test
           filters:
             branches:
               only: master
