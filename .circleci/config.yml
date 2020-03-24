@@ -29,21 +29,29 @@ jobs:
             
             echo "Checking version number has been updated"
             
+            echo "TEST1"
+
             PACKAGE_NAME=$(cat package.json \
-                          | grep name \
-                          | head -1 \
-                          | awk -F: '{ print $2 }' \
-                          | sed 's/[",]//g' \
-                          | tr -d '[[:space:]]')
+              | grep name \
+              | head -1 \
+              | awk -F: '{ print $2 }' \
+              | sed 's/[",]//g' \
+              | tr -d '[[:space:]]')
+
+            echo "TEST2"
             
             PACKAGE_VERSION=$(cat package.json \
-                          | grep version \
-                          | head -1 \
-                          | awk -F: '{ print $2 }' \
-                          | sed 's/[",]//g' \
-                          | tr -d '[[:space:]]')
+              | grep version \
+              | head -1 \
+              | awk -F: '{ print $2 }' \
+              | sed 's/[",]//g' \
+              | tr -d '[[:space:]]')
+
+            echo "TEST3"
             
             LAST_VERSION=$(npm view $PACKAGE_NAME version)
+
+            echo "TEST4"
             
             if [[ "$PACKAGE_VERSION" == "$LAST_VERSION" ]]; then
               echo "Package version should be updated"
