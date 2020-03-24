@@ -21,7 +21,9 @@ module.exports = {
 			'error',
 			{
 				useTabs: true,
-				singleQuote: true
+				singleQuote: true,
+				arrowParens: 'avoid',
+				trailingComma: 'none'
 			}
 		]
 	},
