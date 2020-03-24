@@ -1,6 +1,6 @@
 {
 	"name": "@techgreens/eslint-config-techgreens",
-	"version": "1.0.0-alpha.5",
+	"version": "1.0.0",
 	"description": "An ESLint and Prettier config ready to go for techgreens projects",
 	"main": "index.js",
 	"files": [
@@ -34,7 +34,7 @@
 		"eslint-plugin-prettier": "^3.1.0"
 	},
 	"devDependencies": {
-		"eslint": "^6.4.0",
-		"prettier": "^1.18.2"
+		"eslint": "^6.8.0",
+		"prettier": "^2.0.2"
 	}
 }
