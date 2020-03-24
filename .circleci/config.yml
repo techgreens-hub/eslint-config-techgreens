@@ -24,6 +24,8 @@ jobs:
 
             git diff --name-only origin/master HEAD
 
+            echo Hello | grep -c Hello
+
             echo "TESTX"
 
             DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
