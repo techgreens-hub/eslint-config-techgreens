@@ -22,17 +22,16 @@ jobs:
 
             echo "TESTX"
 
-            DIFF=$(git diff --name-only origin/master HEAD | grep -c "index.js\|package-lock.json\|package.json")
+            CHANGES=$(git diff --name-only origin/master HEAD \
+              | grep -c 'index.js\|package-lock.json\|package.json')
 
-            echo "TESTX"
-
-            # DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
+            echo $CHANGES
 
             echo "TESTY"
 
             exit 1
             
-            if [[ $DIFF -eq 0 ]]; then
+            if [[ $CHANGES -eq 0 ]]; then
               echo "No changes to application, skipping deployment"
               exit 0
             fi
