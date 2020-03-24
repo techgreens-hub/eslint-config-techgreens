@@ -20,17 +20,9 @@ jobs:
           command: |
             echo "Checking files relating to package have changed"
 
-            echo "TESTX"
-
             DIFF=$(git diff --name-only origin/master HEAD \
               | grep -c 'index.js\|package-lock.json\|package.json' || true)
 
-            echo $DIFF
-
-            echo "TESTY"
-
-            exit 1
-            
             if [[ $DIFF -eq 0 ]]; then
               echo "No changes to application, skipping deployment"
               exit 0
@@ -38,8 +30,6 @@ jobs:
             
             echo "Checking version number has been updated"
             
-            echo "TEST1"
-
             PACKAGE_NAME=$(cat package.json \
               | grep name \
               | head -1 \
@@ -47,8 +37,6 @@ jobs:
               | sed 's/[",]//g' \
               | tr -d '[[:space:]]')
 
-            echo "TEST2"
-            
             PACKAGE_VERSION=$(cat package.json \
               | grep version \
               | head -1 \
@@ -56,11 +44,7 @@ jobs:
               | sed 's/[",]//g' \
               | tr -d '[[:space:]]')
 
-            echo "TEST3"
-            
             LAST_VERSION=$(npm view $PACKAGE_NAME version)
-
-            echo "TEST4"
             
             if [[ "$PACKAGE_VERSION" == "$LAST_VERSION" ]]; then
               echo "Package version should be updated"
@@ -96,7 +80,8 @@ jobs:
       - run:
           name: Publish to NPM
           command: |
-            DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
+            DIFF=$(git diff --name-only origin/master HEAD \
+              | grep -c 'index.js\|package-lock.json\|package.json' || true)
             
             if [[ $DIFF -eq 0 ]]; then
               echo "No changes to application, skipping deployment"
