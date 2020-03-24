@@ -22,7 +22,9 @@ jobs:
 
             echo "TESTX"
 
-            git status
+            git diff --name-only origin/master HEAD
+
+            echo "TESTX"
 
             DIFF=$(git diff --name-only origin/master HEAD | grep -c 'index.js\|package-lock.json\|package.json')
 
